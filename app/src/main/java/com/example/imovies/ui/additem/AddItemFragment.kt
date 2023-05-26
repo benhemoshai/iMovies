@@ -52,6 +52,10 @@ class AddItemFragment : Fragment() {
         binding.imageBtn.setOnClickListener {
             pickItemLauncher.launch(arrayOf("image/*"))
         }
+
+        binding.movieButton.setOnClickListener {
+            findNavController().navigate(R.id.action_addItemFragment_to_chooseMovieFragment)
+        }
         return binding.root
     }
 

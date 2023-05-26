@@ -39,10 +39,24 @@
             app:popExitAnim="@anim/to_right"
             app:popUpTo="@id/allItemsFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addItemFragment_to_chooseMovieFragment"
+            app:destination="@id/chooseMovieFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailedItemFragment"
         android:name="com.example.imovies.ui.detailitem.DetailedItemFragment"
         android:label="detail_item_layout"
         tools:layout="@layout/detail_item_layout" />
+    <fragment
+        android:id="@+id/chooseMovieFragment"
+        android:name="com.example.imovies.ui.choosemovie.chooseMovieFragment"
+        android:label="fragment_choose_movie"
+        tools:layout="@layout/fragment_choose_movie" >
+        <action
+            android:id="@+id/action_chooseMovieFragment_to_addItemFragment"
+            app:destination="@id/addItemFragment" />
+    </fragment>
+
+
 </navigation>

@@ -1,8 +1,11 @@
 package com.example.imovies.data.model
 
+import android.view.View
+import android.widget.ImageView
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.Date
 
 @Entity(tableName = "items_table")
 data class Item(
