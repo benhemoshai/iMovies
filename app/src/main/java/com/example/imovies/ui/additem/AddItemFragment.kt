@@ -56,6 +56,8 @@ class AddItemFragment : Fragment() {
         binding.movieButton.setOnClickListener {
             findNavController().navigate(R.id.action_addItemFragment_to_chooseMovieFragment)
         }
+
+
         return binding.root
     }
 
