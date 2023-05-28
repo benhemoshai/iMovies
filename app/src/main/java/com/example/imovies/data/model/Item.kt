@@ -1,5 +1,6 @@
 package com.example.imovies.data.model
 
+import android.media.Image
 import android.view.View
 import android.widget.ImageView
 import androidx.room.ColumnInfo

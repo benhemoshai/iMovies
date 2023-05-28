@@ -1,11 +1,14 @@
 package com.example.imovies.ui.additem
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -15,6 +18,7 @@ import com.example.imovies.data.model.Item
 import com.example.imovies.ui.ItemViewModel
 import com.example.imovies.R
 import com.example.imovies.databinding.AddItemLayoutBinding
+import java.util.*
 
 class AddItemFragment : Fragment() {
 
@@ -23,7 +27,8 @@ class AddItemFragment : Fragment() {
     private var _binding : AddItemLayoutBinding?  = null
     private val binding get() = _binding!!
 
-    private var imgeUri : Uri? = null
+   private var imgeUri : Uri? = null
+
 
     val pickItemLauncher : ActivityResultLauncher<Array<String>> =
         registerForActivityResult(ActivityResultContracts.OpenDocument()) {
@@ -31,6 +36,8 @@ class AddItemFragment : Fragment() {
             requireActivity().contentResolver.takePersistableUriPermission(it!!,Intent.FLAG_GRANT_READ_URI_PERMISSION)
             imgeUri = it
         }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,10 +55,24 @@ class AddItemFragment : Fragment() {
 
             findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
         }
+        parentFragmentManager.setFragmentResultListener("movieDetailsRequestKey", this) { _, result ->
+            val movieName = result.getString("movieName")
 
-        binding.imageBtn.setOnClickListener {
-            pickItemLauncher.launch(arrayOf("image/*"))
+            // Set the movie name in the EditText
+            binding.MovieName.setText(movieName)
+            val drawableResId = getDrawableResourceIdForMovie(movieName)
+            if (drawableResId != 0) {
+                binding.resultImage.setImageResource(drawableResId)
+            }
         }
+
+
+      binding.imageBtn.setOnClickListener {
+          pickItemLauncher.launch(arrayOf("image/*"))
+     }
+
+
+
 
         binding.movieButton.setOnClickListener {
             findNavController().navigate(R.id.action_addItemFragment_to_chooseMovieFragment)
@@ -60,10 +81,20 @@ class AddItemFragment : Fragment() {
 
         return binding.root
     }
-
+    private fun getDrawableResourceIdForMovie(movieName: String?): Int {
+        return when (movieName) {
+            "Movie 1" -> R.drawable.movie1
+            "Movie 2" -> R.drawable.movie2
+            "Movie 3" -> R.drawable.movie3
+            // Add more cases for other movie names and their corresponding drawable resources
+            else -> 0 // Return 0 if no matching resource is found
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-}
+
+
+    }

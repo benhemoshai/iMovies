@@ -64,5 +64,17 @@
         android:layout_height="wrap_content"
         android:text="Movies" />
 
+    <TextView
+        android:id="@+id/MovieName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date" />
+
 
 </LinearLayout>
