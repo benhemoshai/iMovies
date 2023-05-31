@@ -14,13 +14,14 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imovies.ui.ItemViewModel
 import com.example.imovies.R
+import android.app.AlertDialog
 import com.example.imovies.databinding.AllItemsFragmentBinding
 
 class AllItemsFragment : Fragment() {
 
     private var _binding:AllItemsFragmentBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var deleteAllDialog: AlertDialog
     private val viewModel : ItemViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -81,7 +82,7 @@ class AllItemsFragment : Fragment() {
                 }
             })
         }
-        binding.recycler.layoutManager = GridLayoutManager(requireContext(),2)
+        binding.recycler.layoutManager = GridLayoutManager(requireContext(),1)
 
 
         ItemTouchHelper(object : ItemTouchHelper.Callback() {

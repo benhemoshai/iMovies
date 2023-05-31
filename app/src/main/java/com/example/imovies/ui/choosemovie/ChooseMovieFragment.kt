@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imovies.R
 
-class chooseMovieFragment : Fragment() {
+class ChooseMovieFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MovieAdapter
     private val movieList = listOf(

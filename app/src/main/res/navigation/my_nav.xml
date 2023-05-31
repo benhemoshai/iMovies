@@ -50,7 +50,7 @@
         tools:layout="@layout/detail_item_layout" />
     <fragment
         android:id="@+id/chooseMovieFragment"
-        android:name="com.example.imovies.ui.choosemovie.chooseMovieFragment"
+        android:name="com.example.imovies.ui.choosemovie.ChooseMovieFragment"
         android:label="fragment_choose_movie"
         tools:layout="@layout/fragment_choose_movie" >
         <action

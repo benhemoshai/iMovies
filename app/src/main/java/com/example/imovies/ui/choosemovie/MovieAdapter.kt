@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imovies.R
 
+
 class MovieAdapter(
     private val movies: List<Movie>,
     private val onItemClick: (Movie) -> Unit
@@ -18,7 +19,9 @@ class MovieAdapter(
             .inflate(R.layout.movie_layout, parent, false)
         return MovieViewHolder(view)
     }
+
     data class Movie(val imageResource: Int, val name: String)
+
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = movies[position]

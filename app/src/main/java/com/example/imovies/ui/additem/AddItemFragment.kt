@@ -28,15 +28,14 @@ class AddItemFragment : Fragment() {
     private val binding get() = _binding!!
 
    private var imgeUri : Uri? = null
-
-
+/*
     val pickItemLauncher : ActivityResultLauncher<Array<String>> =
         registerForActivityResult(ActivityResultContracts.OpenDocument()) {
             binding.resultImage.setImageURI(it)
             requireActivity().contentResolver.takePersistableUriPermission(it!!,Intent.FLAG_GRANT_READ_URI_PERMISSION)
             imgeUri = it
         }
-
+*/
 
 
     override fun onCreateView(
@@ -49,12 +48,18 @@ class AddItemFragment : Fragment() {
         binding.finishBtn.setOnClickListener {
            /* val bundle  = bundleOf("title" to binding.itemTitle.text.toString(),
                 "description" to binding.itemDescription.text.toString())*/
-            val item = Item(binding.itemTitle.text.toString(), binding.itemDescription.text.toString(), imgeUri.toString())
+
+            val movieName = binding.MovieName.text.toString()
+            val resourceId = getDrawableResourceIdForMovie(movieName)
+            val uri = Uri.parse("android.resource://${requireContext().packageName}/$resourceId")
+            imgeUri=uri
+            val item = Item(movieName, binding.itemDescription.text.toString(), imgeUri.toString())
 
             viewModel.addItem(item)
 
             findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
         }
+
         parentFragmentManager.setFragmentResultListener("movieDetailsRequestKey", this) { _, result ->
             val movieName = result.getString("movieName")
 
@@ -67,9 +72,9 @@ class AddItemFragment : Fragment() {
         }
 
 
-      binding.imageBtn.setOnClickListener {
-          pickItemLauncher.launch(arrayOf("image/*"))
-     }
+     // binding.imageBtn.setOnClickListener {
+     //     pickItemLauncher.launch(arrayOf("image/*"))
+   //  }
 
 
 
