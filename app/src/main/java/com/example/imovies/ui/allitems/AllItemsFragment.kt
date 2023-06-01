@@ -15,13 +15,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.imovies.ui.ItemViewModel
 import com.example.imovies.R
 import android.app.AlertDialog
+import android.content.Context
 import com.example.imovies.databinding.AllItemsFragmentBinding
 
 class AllItemsFragment : Fragment() {
 
     private var _binding:AllItemsFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var deleteAllDialog: AlertDialog
+    private lateinit var builder: AlertDialog.Builder
     private val viewModel : ItemViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -34,6 +35,7 @@ class AllItemsFragment : Fragment() {
         arguments?.getString("title")?.let {
             Toast.makeText(requireActivity(),it,Toast.LENGTH_SHORT).show()
         }
+
         binding.flotaingAction.setOnClickListener {
 
            findNavController().navigate(R.id.action_allItemsFragment_to_addItemFragment)
@@ -41,9 +43,6 @@ class AllItemsFragment : Fragment() {
         }
         return binding.root
     }
-
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,13 +58,29 @@ class AllItemsFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Handle the menu selection
                 return when (menuItem.itemId) {
+
                     R.id.action_delete -> {
-                        viewModel.deleteAll()
+                        showDeleteAllDialog()
                         true
                     }
                     else -> false
                 }
             }
+            private fun showDeleteAllDialog() {
+                val dialogBuilder = AlertDialog.Builder(requireContext())
+                dialogBuilder.setTitle("Delete All Items")
+                dialogBuilder.setMessage("Are you sure you want to delete all items?")
+                dialogBuilder.setPositiveButton("Delete") { dialog, which ->
+                    viewModel.deleteAll()
+                    dialog.dismiss()
+                }
+                dialogBuilder.setNegativeButton("Cancel") { dialog, which ->
+                    dialog.dismiss()
+                }
+                val dialog = dialogBuilder.create()
+                dialog.show()
+            }
+
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         viewModel.items?.observe(viewLifecycleOwner) {

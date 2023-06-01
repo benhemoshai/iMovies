@@ -1,5 +1,6 @@
 package com.example.imovies.ui.additem
 
+import MovieViewModel
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -18,74 +20,64 @@ import com.example.imovies.data.model.Item
 import com.example.imovies.ui.ItemViewModel
 import com.example.imovies.R
 import com.example.imovies.databinding.AddItemLayoutBinding
+import java.lang.Thread.sleep
 import java.util.*
 
 class AddItemFragment : Fragment() {
 
     private val viewModel : ItemViewModel by activityViewModels()
+    private val movieviewmodel : MovieViewModel by activityViewModels()
 
     private var _binding : AddItemLayoutBinding?  = null
     private val binding get() = _binding!!
 
    private var imgeUri : Uri? = null
-/*
-    val pickItemLauncher : ActivityResultLauncher<Array<String>> =
-        registerForActivityResult(ActivityResultContracts.OpenDocument()) {
-            binding.resultImage.setImageURI(it)
-            requireActivity().contentResolver.takePersistableUriPermission(it!!,Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            imgeUri = it
-        }
-*/
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = AddItemLayoutBinding.inflate(inflater,container,false)
+        _binding = AddItemLayoutBinding.inflate(inflater, container, false)
 
-        binding.finishBtn.setOnClickListener {
-           /* val bundle  = bundleOf("title" to binding.itemTitle.text.toString(),
-                "description" to binding.itemDescription.text.toString())*/
-
-            val movieName = binding.MovieName.text.toString()
-            val resourceId = getDrawableResourceIdForMovie(movieName)
-            val uri = Uri.parse("android.resource://${requireContext().packageName}/$resourceId")
-            imgeUri=uri
-            val item = Item(movieName, binding.itemDescription.text.toString(), imgeUri.toString())
-
-            viewModel.addItem(item)
-
-            findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
-        }
-
-        parentFragmentManager.setFragmentResultListener("movieDetailsRequestKey", this) { _, result ->
-            val movieName = result.getString("movieName")
-
-            // Set the movie name in the EditText
-            binding.MovieName.setText(movieName)
+        movieviewmodel.movieName.observe(viewLifecycleOwner) { movieName ->
+            binding.MovieName.text = movieName.toString()
             val drawableResId = getDrawableResourceIdForMovie(movieName)
             if (drawableResId != 0) {
                 binding.resultImage.setImageResource(drawableResId)
+                imgeUri =
+                    Uri.parse("android.resource://${requireContext().packageName}/${drawableResId}")
             }
         }
 
+        binding.finishBtn.setOnClickListener {
+            if (binding.MovieName.text.toString() == "Not yet selected") {
+                Toast.makeText(requireContext(), "Pick a movie", Toast.LENGTH_LONG).show()
+            } else {
+                movieviewmodel.movieName.observe(viewLifecycleOwner) {
+                    binding.MovieName.text = it
+                }
 
-     // binding.imageBtn.setOnClickListener {
-     //     pickItemLauncher.launch(arrayOf("image/*"))
-   //  }
+                val item = Item(
+                    binding.MovieName.text.toString(),
+                    binding.itemDescription.text.toString(),
+                    imgeUri.toString()
+                )
+                viewModel.addItem(item)
+                findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
+                sleep(1000)
+                movieviewmodel.setResultImage(0)
+                movieviewmodel.setMovieName("Not yet selected")
+            }
+        }
+            binding.movieButton.setOnClickListener {
+                findNavController().navigate(R.id.action_addItemFragment_to_chooseMovieFragment)
+            }
 
-
-
-
-        binding.movieButton.setOnClickListener {
-            findNavController().navigate(R.id.action_addItemFragment_to_chooseMovieFragment)
+            return binding.root
         }
 
 
-        return binding.root
-    }
     private fun getDrawableResourceIdForMovie(movieName: String?): Int {
         return when (movieName) {
             "Movie 1" -> R.drawable.movie1

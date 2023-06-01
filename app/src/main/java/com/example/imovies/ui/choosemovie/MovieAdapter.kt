@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imovies.R
+import com.example.imovies.databinding.AddItemLayoutBinding
 
 
 class MovieAdapter(
@@ -21,7 +22,6 @@ class MovieAdapter(
     }
 
     data class Movie(val imageResource: Int, val name: String)
-
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = movies[position]

@@ -8,12 +8,21 @@
     tools:context=".ui.additem.AddItemFragment"
     android:padding="16dp">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <TextView
+        android:id="@+id/MovieName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        >
-    </com.google.android.material.textfield.TextInputLayout>
+        android:text="Not yet selected"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        />
+
+    <Button
+        android:id="@+id/movie_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pick a Movie" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -28,16 +37,19 @@
             android:id="@+id/item_description" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-
-
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="350dp"
+        android:layout_height="400dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:id="@+id/result_image"
         android:src="@mipmap/ic_launcher"/>
+
+    <Button
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date" />
 
     <Button
         android:id="@+id/finish_btn"
@@ -46,24 +58,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:text="Finish" />
-
-    <Button
-        android:id="@+id/movie_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Movies" />
-
-    <TextView
-        android:id="@+id/MovieName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
-    <Button
-        android:id="@+id/date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Date" />
 
 
 </LinearLayout>
