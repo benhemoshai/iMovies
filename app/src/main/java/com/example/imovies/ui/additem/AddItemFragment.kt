@@ -50,6 +50,8 @@ class AddItemFragment : Fragment() {
             }
         }
 
+
+
         binding.finishBtn.setOnClickListener {
             if (binding.MovieName.text.toString() == "Not yet selected") {
                 Toast.makeText(requireContext(), "Pick a movie", Toast.LENGTH_LONG).show()
