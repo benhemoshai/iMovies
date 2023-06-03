@@ -30,6 +30,7 @@ class DetailedItemFragment : Fragment() {
         viewModel.chosenItem.observe(viewLifecycleOwner) {
             binding.itemTitle.text = it.title
             binding.itemDesc.text = it.description
+            binding.itemDate.text = it.date
             Glide.with(requireContext()).load(it.photo)
                 .into(binding.itemImage)
         }

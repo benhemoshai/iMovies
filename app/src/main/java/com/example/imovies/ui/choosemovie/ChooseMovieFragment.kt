@@ -23,6 +23,14 @@ class ChooseMovieFragment : Fragment() {
         MovieAdapter.Movie(R.drawable.movie1, "Movie 1"),
         MovieAdapter.Movie(R.drawable.movie2, "Movie 2"),
         MovieAdapter.Movie(R.drawable.movie3, "Movie 3"),
+        MovieAdapter.Movie(R.drawable.movie4, "Movie 4"),
+        MovieAdapter.Movie(R.drawable.movie5, "Movie 5"),
+        MovieAdapter.Movie(R.drawable.movie6, "Movie 6"),
+        MovieAdapter.Movie(R.drawable.movie7, "Movie 7"),
+        MovieAdapter.Movie(R.drawable.movie8, "Movie 8"),
+        MovieAdapter.Movie(R.drawable.movie9, "Movie 9"),
+        MovieAdapter.Movie(R.drawable.movie10, "Movie 10")
+
         // Add more movie resources as needed
     )
 

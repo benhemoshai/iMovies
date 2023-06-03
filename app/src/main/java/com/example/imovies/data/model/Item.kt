@@ -17,6 +17,9 @@ data class Item(
     @ColumnInfo(name = "description")
     val description:String,
 
+    @ColumnInfo(name = "date")
+    val date:String,
+
     @ColumnInfo(name = "image")
     val photo: String?)
 {

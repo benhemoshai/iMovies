@@ -19,19 +19,22 @@ import androidx.navigation.fragment.findNavController
 import com.example.imovies.data.model.Item
 import com.example.imovies.ui.ItemViewModel
 import com.example.imovies.R
+import java.util.Calendar
+import java.util.Date
 import com.example.imovies.databinding.AddItemLayoutBinding
 import java.lang.Thread.sleep
+import java.text.SimpleDateFormat
 import java.util.*
 
 class AddItemFragment : Fragment() {
 
     private val viewModel : ItemViewModel by activityViewModels()
     private val movieviewmodel : MovieViewModel by activityViewModels()
-
+    private var selectedDate: Date? = null
     private var _binding : AddItemLayoutBinding?  = null
     private val binding get() = _binding!!
 
-   private var imgeUri : Uri? = null
+    private var imgeUri : Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,11 +53,16 @@ class AddItemFragment : Fragment() {
             }
         }
 
+        movieviewmodel.date.observe(viewLifecycleOwner){ date->
+            binding.date.text = date
+        }
 
 
         binding.finishBtn.setOnClickListener {
             if (binding.MovieName.text.toString() == "Not yet selected") {
                 Toast.makeText(requireContext(), "Pick a movie", Toast.LENGTH_LONG).show()
+            } else if (binding.date.text.toString() == "Date") {
+                Toast.makeText(requireContext(), "Pick a date", Toast.LENGTH_LONG).show()
             } else {
                 movieviewmodel.movieName.observe(viewLifecycleOwner) {
                     binding.MovieName.text = it
@@ -63,6 +71,7 @@ class AddItemFragment : Fragment() {
                 val item = Item(
                     binding.MovieName.text.toString(),
                     binding.itemDescription.text.toString(),
+                    binding.date.text.toString(),
                     imgeUri.toString()
                 )
                 viewModel.addItem(item)
@@ -72,23 +81,69 @@ class AddItemFragment : Fragment() {
                 movieviewmodel.setMovieName("Not yet selected")
             }
         }
-            binding.movieButton.setOnClickListener {
-                findNavController().navigate(R.id.action_addItemFragment_to_chooseMovieFragment)
-            }
+        binding.date.setOnClickListener {
+            showDatePicker()
 
-            return binding.root
+        }
+        binding.movieButton.setOnClickListener {
+            findNavController().navigate(R.id.action_addItemFragment_to_chooseMovieFragment)
         }
 
+        return binding.root
 
+    }
     private fun getDrawableResourceIdForMovie(movieName: String?): Int {
         return when (movieName) {
             "Movie 1" -> R.drawable.movie1
             "Movie 2" -> R.drawable.movie2
             "Movie 3" -> R.drawable.movie3
+            "Movie 4" -> R.drawable.movie4
+            "Movie 5" -> R.drawable.movie5
+            "Movie 6" -> R.drawable.movie6
+            "Movie 7" -> R.drawable.movie7
+            "Movie 8" -> R.drawable.movie8
+            "Movie 9" -> R.drawable.movie9
+            "Movie 10" -> R.drawable.movie10
             // Add more cases for other movie names and their corresponding drawable resources
             else -> 0 // Return 0 if no matching resource is found
         }
     }
+
+    private fun showDatePicker() {
+        val calendar = Calendar.getInstance()
+        val currentYear = calendar.get(Calendar.YEAR)
+        val currentMonth = calendar.get(Calendar.MONTH)
+        val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, year, month, day ->
+                val selectedCalendar = Calendar.getInstance()
+                selectedCalendar.set(year, month, day)
+                selectedDate = selectedCalendar.time
+
+                updateSelectedDateView()
+            },
+            currentYear,
+            currentMonth,
+            currentDay
+        )
+
+        // Disable past dates
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+
+        datePickerDialog.show()
+    }
+    private fun updateSelectedDateView() {
+        if (selectedDate != null) {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val formattedDate = dateFormat.format(selectedDate!!)
+            binding.date.text = formattedDate
+            movieviewmodel.setDate(binding.date.text.toString())
+
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -96,4 +151,4 @@ class AddItemFragment : Fragment() {
     }
 
 
-    }
+}

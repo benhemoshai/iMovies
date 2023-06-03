@@ -35,6 +35,7 @@ class ItemAdapter(val items:List<Item>, private val callback: ItemListener) : Re
         fun bind(item: Item) {
             binding.itemTitle.text = item.title
             binding.itemDescription.text = item.description
+            binding.itemDate.text = item.date
             Glide.with(binding.root).load(item.photo).circleCrop().into(binding.itemImage)
         }
     }
