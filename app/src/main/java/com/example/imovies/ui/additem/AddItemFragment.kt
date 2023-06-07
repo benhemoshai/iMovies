@@ -76,8 +76,8 @@ class AddItemFragment : Fragment() {
                 )
                 viewModel.addItem(item)
                 findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
-                sleep(1000)
                 movieviewmodel.setResultImage(0)
+                movieviewmodel.setDate("Date")
                 movieviewmodel.setMovieName("Not yet selected")
             }
         }
@@ -94,16 +94,16 @@ class AddItemFragment : Fragment() {
     }
     private fun getDrawableResourceIdForMovie(movieName: String?): Int {
         return when (movieName) {
-            "Movie 1" -> R.drawable.movie1
-            "Movie 2" -> R.drawable.movie2
-            "Movie 3" -> R.drawable.movie3
-            "Movie 4" -> R.drawable.movie4
-            "Movie 5" -> R.drawable.movie5
-            "Movie 6" -> R.drawable.movie6
-            "Movie 7" -> R.drawable.movie7
-            "Movie 8" -> R.drawable.movie8
-            "Movie 9" -> R.drawable.movie9
-            "Movie 10" -> R.drawable.movie10
+            getString(R.string.movie_name_1) -> R.drawable.movie1
+            getString(R.string.movie_name_2) -> R.drawable.movie2
+            getString(R.string.movie_name_3)-> R.drawable.movie3
+            getString(R.string.movie_name_4) -> R.drawable.movie4
+            getString(R.string.movie_name_5) -> R.drawable.movie5
+            getString(R.string.movie_name_6) -> R.drawable.movie6
+            getString(R.string.movie_name_7) -> R.drawable.movie7
+            getString(R.string.movie_name_8) -> R.drawable.movie8
+            getString(R.string.movie_name_9)-> R.drawable.movie9
+            getString(R.string.movie_name_10)-> R.drawable.movie10
             // Add more cases for other movie names and their corresponding drawable resources
             else -> 0 // Return 0 if no matching resource is found
         }

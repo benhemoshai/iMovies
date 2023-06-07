@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/black"
     tools:context=".ui.additem.AddItemFragment"
-    android:padding="16dp">
+    >
 
     <TextView
         android:id="@+id/MovieName"
@@ -15,6 +16,7 @@
         android:text="Not yet selected"
         android:textAlignment="center"
         android:textSize="25dp"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
         />
 
@@ -22,23 +24,25 @@
         android:id="@+id/movie_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pick a Movie" />
+        android:text="Pick a Movie"
+        android:backgroundTint="#e33c53"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
        >
 
 
         <ImageView
             android:id="@+id/result_image"
-            android:layout_width="399dp"
-            android:layout_height="250dp"
+            android:layout_width="376dp"
+            android:layout_height="230dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/popcorn" />
 
         <LinearLayout
             android:layout_width="308dp"
@@ -52,20 +56,25 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/purple_500">
+
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/item_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter item Description" />
+                    android:background="#FFFFFF"
+                    android:hint="Enter item Description"
+                    android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date" />
+                android:text="Date"
+                android:backgroundTint="#e33c53"/>
 
             <Button
                 android:id="@+id/finish_btn"
@@ -73,7 +82,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="Finish" />
+                android:text="Finish"
+                android:backgroundTint="#e33c53"/>
         </LinearLayout>
 
     </LinearLayout>

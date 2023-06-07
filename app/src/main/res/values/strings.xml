@@ -2,4 +2,16 @@
     <string name="app_name">iMovies</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movie_name_1">Guardians Of The Galaxy</string>
+    <string name="movie_name_2">Doctor Strange</string>
+    <string name="movie_name_3">Captain America - The Winter Solider</string>
+    <string name="movie_name_4">Captain America</string>
+    <string name="movie_name_5">Thor - The Dark World</string>
+    <string name="movie_name_6">Iron Man 2</string>
+    <string name="movie_name_7">Thor - Ragnarok</string>
+    <string name="movie_name_8">Iron Man</string>
+    <string name="movie_name_9">Thor</string>
+    <string name="movie_name_10">Iron Man 3</string>
+
+
 </resources>

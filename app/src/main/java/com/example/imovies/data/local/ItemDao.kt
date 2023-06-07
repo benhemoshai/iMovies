@@ -21,7 +21,7 @@ interface ItemDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateItem(item: Item)
 
-    @Query("SELECT * from items_table ORDER BY title ASC")
+    @Query("SELECT * from items_table ORDER BY date ASC")
     fun getItems() : LiveData<List<Item>>
 
     @Query("SELECT * from items_table WHERE title LIKE :title")

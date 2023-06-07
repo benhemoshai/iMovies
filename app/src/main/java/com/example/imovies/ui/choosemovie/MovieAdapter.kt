@@ -21,7 +21,7 @@ class MovieAdapter(
         return MovieViewHolder(view)
     }
 
-    data class Movie(val imageResource: Int, val name: String)
+    data class Movie( val name: String,val imageResource: Int)
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = movies[position]
@@ -40,8 +40,8 @@ class MovieAdapter(
         private val movieNameTextView: TextView = itemView.findViewById(R.id.item_title)
 
         fun bind(movie: Movie) {
-            imageView.setImageResource(movie.imageResource)
             movieNameTextView.text = movie.name
+            imageView.setImageResource(movie.imageResource)
         }
     }
 }

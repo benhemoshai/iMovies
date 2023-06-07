@@ -22,7 +22,6 @@ class AllItemsFragment : Fragment() {
 
     private var _binding:AllItemsFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var builder: AlertDialog.Builder
     private val viewModel : ItemViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -87,14 +86,10 @@ class AllItemsFragment : Fragment() {
 
             binding.recycler.adapter = ItemAdapter(it, object : ItemAdapter.ItemListener {
                 override fun onItemClicked(index: Int) {
-                    Toast.makeText(requireContext(),it[index].toString(),Toast.LENGTH_LONG).show()
-                }
-
-                override fun onItemLongClick(index: Int) {
-                   // Toast.makeText(requireContext(),"Long click",Toast.LENGTH_LONG).show()
                     viewModel.setItem(it[index])
                     findNavController().navigate(R.id.action_allItemsFragment_to_detailedItemFragment)
                 }
+
             })
         }
         binding.recycler.layoutManager = GridLayoutManager(requireContext(),1)

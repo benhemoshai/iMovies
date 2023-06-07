@@ -12,24 +12,17 @@ class ItemAdapter(val items:List<Item>, private val callback: ItemListener) : Re
 
     interface ItemListener {
         fun onItemClicked(index:Int)
-        fun onItemLongClick(index:Int)
     }
 
     inner class ItemViewHolder(private val binding:ItemLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root),View.OnClickListener,View.OnLongClickListener {
+        RecyclerView.ViewHolder(binding.root),View.OnClickListener {
 
         init {
             binding.root.setOnClickListener(this)
-            binding.root.setOnLongClickListener(this)
         }
 
         override fun onClick(p0: View?) {
             callback.onItemClicked(adapterPosition)
-        }
-
-        override fun onLongClick(p0: View?): Boolean {
-            callback.onItemLongClick(adapterPosition)
-            return true
         }
 
         fun bind(item: Item) {

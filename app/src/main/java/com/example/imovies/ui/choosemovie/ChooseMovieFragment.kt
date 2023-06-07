@@ -13,26 +13,29 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imovies.R
 
+
 class ChooseMovieFragment : Fragment() {
 
     private val sharedviewmodel : MovieViewModel by activityViewModels()
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MovieAdapter
-    private val movieList = listOf(
-        MovieAdapter.Movie(R.drawable.movie1, "Movie 1"),
-        MovieAdapter.Movie(R.drawable.movie2, "Movie 2"),
-        MovieAdapter.Movie(R.drawable.movie3, "Movie 3"),
-        MovieAdapter.Movie(R.drawable.movie4, "Movie 4"),
-        MovieAdapter.Movie(R.drawable.movie5, "Movie 5"),
-        MovieAdapter.Movie(R.drawable.movie6, "Movie 6"),
-        MovieAdapter.Movie(R.drawable.movie7, "Movie 7"),
-        MovieAdapter.Movie(R.drawable.movie8, "Movie 8"),
-        MovieAdapter.Movie(R.drawable.movie9, "Movie 9"),
-        MovieAdapter.Movie(R.drawable.movie10, "Movie 10")
+    private val movieList : List<MovieAdapter.Movie> by lazy {
+        listOf(
+            MovieAdapter.Movie(getString(R.string.movie_name_1), R.drawable.movie1),
+            MovieAdapter.Movie(getString(R.string.movie_name_2), R.drawable.movie2),
+            MovieAdapter.Movie(getString(R.string.movie_name_3), R.drawable.movie3),
+            MovieAdapter.Movie(getString(R.string.movie_name_4), R.drawable.movie4),
+            MovieAdapter.Movie(getString(R.string.movie_name_5), R.drawable.movie5),
+            MovieAdapter.Movie(getString(R.string.movie_name_6), R.drawable.movie6),
+            MovieAdapter.Movie(getString(R.string.movie_name_7), R.drawable.movie7),
+            MovieAdapter.Movie(getString(R.string.movie_name_8), R.drawable.movie8),
+            MovieAdapter.Movie(getString(R.string.movie_name_9), R.drawable.movie9),
+            MovieAdapter.Movie(getString(R.string.movie_name_10), R.drawable.movie10)
+        )
 
-        // Add more movie resources as needed
-    )
+
+
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_choose_movie, container, false)
