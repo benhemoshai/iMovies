@@ -5,20 +5,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.allitems.AllItemsFragment"
-    android:background="@color/black">
+    android:background="@color/softblack">
+
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler"/>
-
+        tools:layout_editor_absoluteX="-149dp"
+        tools:layout_editor_absoluteY="-200dp" />
 
     <Button
         android:id="@+id/flotaing_action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="17dp"
-        android:text="Add a movie"
+        android:text="@string/add_movie_button"
         android:backgroundTint="#e33c53"
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"

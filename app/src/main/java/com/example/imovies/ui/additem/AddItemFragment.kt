@@ -43,6 +43,8 @@ class AddItemFragment : Fragment() {
     ): View? {
         _binding = AddItemLayoutBinding.inflate(inflater, container, false)
 
+
+        //observes changes in the movie name, gets the imageID and parses it to URI
         movieviewmodel.movieName.observe(viewLifecycleOwner) { movieName ->
             binding.MovieName.text = movieName.toString()
             val drawableResId = getDrawableResourceIdForMovie(movieName)
@@ -53,16 +55,20 @@ class AddItemFragment : Fragment() {
             }
         }
 
+        //observes the changes in the date
         movieviewmodel.date.observe(viewLifecycleOwner){ date->
             binding.date.text = date
         }
 
+        //when the user clicks on finish button - checks if he selected a date and a movie
+        //if not, it shows a toast message. if yes it creates an item which includes
+        //a movie name,description, date and an image.
 
         binding.finishBtn.setOnClickListener {
-            if (binding.MovieName.text.toString() == "Not yet selected") {
-                Toast.makeText(requireContext(), "Pick a movie", Toast.LENGTH_LONG).show()
-            } else if (binding.date.text.toString() == "Date") {
-                Toast.makeText(requireContext(), "Pick a date", Toast.LENGTH_LONG).show()
+            if (binding.MovieName.text.toString() == getString(R.string.movie_list_button)) {
+                Toast.makeText(requireContext(), getString(R.string.movie_toast), Toast.LENGTH_LONG).show()
+            } else if (binding.date.text.toString() == getString(R.string.date_button)) {
+                Toast.makeText(requireContext(), getString(R.string.date_toast), Toast.LENGTH_LONG).show()
             } else {
                 movieviewmodel.movieName.observe(viewLifecycleOwner) {
                     binding.MovieName.text = it
@@ -77,14 +83,16 @@ class AddItemFragment : Fragment() {
                 viewModel.addItem(item)
                 findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
                 movieviewmodel.setResultImage(0)
-                movieviewmodel.setDate("Date")
-                movieviewmodel.setMovieName("Not yet selected")
+                movieviewmodel.setDate(getString(R.string.date_button))
+                movieviewmodel.setMovieName(getString(R.string.movie_list_button))
             }
         }
+        //when the user clicks on the date button - opens a date dialog
         binding.date.setOnClickListener {
             showDatePicker()
-
         }
+
+        //when the user clicks on "pick a movie" button - moves to the movie list fragment
         binding.movieButton.setOnClickListener {
             findNavController().navigate(R.id.action_addItemFragment_to_chooseMovieFragment)
         }
@@ -92,6 +100,8 @@ class AddItemFragment : Fragment() {
         return binding.root
 
     }
+
+    //a function that gets a movie name and returns its imageID
     private fun getDrawableResourceIdForMovie(movieName: String?): Int {
         return when (movieName) {
             getString(R.string.movie_name_1) -> R.drawable.movie1
@@ -104,7 +114,6 @@ class AddItemFragment : Fragment() {
             getString(R.string.movie_name_8) -> R.drawable.movie8
             getString(R.string.movie_name_9)-> R.drawable.movie9
             getString(R.string.movie_name_10)-> R.drawable.movie10
-            // Add more cases for other movie names and their corresponding drawable resources
             else -> 0 // Return 0 if no matching resource is found
         }
     }
@@ -140,7 +149,6 @@ class AddItemFragment : Fragment() {
             val formattedDate = dateFormat.format(selectedDate!!)
             binding.date.text = formattedDate
             movieviewmodel.setDate(binding.date.text.toString())
-
         }
     }
 

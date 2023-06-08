@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/black"
+    android:background="@color/softblack"
     tools:context=".ui.additem.AddItemFragment"
     >
 
@@ -13,7 +13,7 @@
         android:id="@+id/MovieName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Not yet selected"
+        android:text="@string/movie_title"
         android:textAlignment="center"
         android:textSize="25dp"
         android:textColor="#FFFFFF"
@@ -24,7 +24,7 @@
         android:id="@+id/movie_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pick a Movie"
+        android:text="@string/movie_list_button"
         android:backgroundTint="#e33c53"/>
 
     <LinearLayout
@@ -65,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
-                    android:hint="Enter item Description"
+                    android:hint="@string/description_hint"
                     android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,7 +73,7 @@
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date"
+                android:text="@string/date_button"
                 android:backgroundTint="#e33c53"/>
 
             <Button
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="Finish"
+                android:text="@string/finish_button"
                 android:backgroundTint="#e33c53"/>
         </LinearLayout>
 

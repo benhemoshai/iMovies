@@ -16,6 +16,8 @@ import com.example.imovies.ui.ItemViewModel
 import com.example.imovies.R
 import android.app.AlertDialog
 import android.content.Context
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.example.imovies.databinding.AllItemsFragmentBinding
 
 class AllItemsFragment : Fragment() {
@@ -24,22 +26,24 @@ class AllItemsFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel : ItemViewModel by activityViewModels()
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         _binding = AllItemsFragmentBinding.inflate(inflater,container,false)
 
         arguments?.getString("title")?.let {
             Toast.makeText(requireActivity(),it,Toast.LENGTH_SHORT).show()
         }
 
+        //when the user clicks on "add a movie" button - moves to the "add item fragment"
         binding.flotaingAction.setOnClickListener {
-
            findNavController().navigate(R.id.action_allItemsFragment_to_addItemFragment)
-
         }
+
         return binding.root
     }
 
@@ -54,6 +58,8 @@ class AllItemsFragment : Fragment() {
                 menuInflater.inflate(R.menu.main_menu,menu)
             }
 
+
+            //when the user clicks on the "delete all" button
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Handle the menu selection
                 return when (menuItem.itemId) {
@@ -65,6 +71,8 @@ class AllItemsFragment : Fragment() {
                     else -> false
                 }
             }
+
+            //opens a dialog that asks the user if he wants to delete the whole list
             private fun showDeleteAllDialog() {
                 val dialogBuilder = AlertDialog.Builder(requireContext())
                 dialogBuilder.setTitle("Delete All Items")
@@ -83,6 +91,7 @@ class AllItemsFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         viewModel.items?.observe(viewLifecycleOwner) {
+
 
             binding.recycler.adapter = ItemAdapter(it, object : ItemAdapter.ItemListener {
                 override fun onItemClicked(index: Int) {

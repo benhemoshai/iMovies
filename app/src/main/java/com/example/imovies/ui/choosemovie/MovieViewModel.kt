@@ -12,7 +12,6 @@ class MovieViewModel : ViewModel() {
     private val _resultImage = MutableLiveData<Int>()
     val resultImage: LiveData<Int> = _resultImage
 
-
     fun setMovieName(name: String) {
         _movieName.value = name
     }

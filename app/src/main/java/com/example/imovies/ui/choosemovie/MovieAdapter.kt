@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imovies.R
-import com.example.imovies.databinding.AddItemLayoutBinding
 
 
 class MovieAdapter(
@@ -21,7 +20,7 @@ class MovieAdapter(
         return MovieViewHolder(view)
     }
 
-    data class Movie( val name: String,val imageResource: Int)
+    data class Movie( val name: String,val imageResource: Int, val year: String)
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = movies[position]
@@ -38,10 +37,12 @@ class MovieAdapter(
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.item_image)
         private val movieNameTextView: TextView = itemView.findViewById(R.id.item_title)
+        private val movieYear: TextView = itemView.findViewById(R.id.item_description)
 
         fun bind(movie: Movie) {
             movieNameTextView.text = movie.name
             imageView.setImageResource(movie.imageResource)
+            movieYear.text = movie.year
         }
     }
 }
